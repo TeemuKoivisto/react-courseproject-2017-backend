@@ -13,7 +13,7 @@ const cors = require("cors");
 
 const app = express();
 
-const port = process.env.PORT || 3332;
+const port = process.env.PORT || 3001;
 
 /**
  * If NODE_ENV is not production use morgan to log all queries to the console
