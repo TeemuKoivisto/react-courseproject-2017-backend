@@ -5,13 +5,13 @@ const errors = require("../config/errors");
 /**
  * Authentication middleware that is called before any requests
  *
- * Checks the request for the X-Access-Token header and then decodes
- * the token and checks if everything matches out after which
- * it lets the user to access the controller's method.
+ * Checks the request for the Authorization header with Bearer ${TOKEN} and then decodes
+ * the token and checks if everything matches out after which it lets the user to access 
+ * the controller's method.
  */
 module.exports.authenticate = (req, res, next) => {
   if (!req.headers["authorization"]) {
-    throw new errors.AuthenticationError("Please make sure your request has X-Access-Token header.");
+    throw new errors.AuthenticationError("Please make sure your request has Authorization header with Bearer ${TOKEN}.");
   }
   const token = req.headers["authorization"].substring(7) // parse token -> Bearer ${TOKEN}
   const decoded = TokenGenerator.verifyToken(token, { audience: "login" });
